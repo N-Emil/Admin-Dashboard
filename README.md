@@ -1,16 +1,55 @@
-# React + Vite
+# 🚀 React Admin Dashboard (Portfolio Project)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern, modular **Admin Dashboard** built with React. It serves as a showcase of my frontend engineering skills, focusing on clean code architecture, secure routing, and scalable project structure. 
 
-Currently, two official plugins are available:
+This project is a **work-in-progress** and part of my professional development syllabus. I will be continuously adding new features such as Context API, API integration, and advanced state management as I progress.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features & Implementation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🛡️ Secure Authentication & Routing
+- **Protected Routes:** Implemented a `ProtectedRoute` wrapper to manage session-based access.
+- **Authentication Logic:** Uses `localStorage` to persist login states and `React Router DOM` for seamless navigation.
+- **Environment Safety:** Sensitive credentials (like Admin login) are managed via `.env` variables using Vite's `import.meta.env`.
 
-## Expanding the ESLint configuration
+### 🏗️ Architecture & Developer Experience (DX)
+- **Path Aliasing:** Configured custom aliases in `vite.config.js` to avoid "prop drilling" and messy imports:
+  - `@/*` points to `src/`
+  - `@views/*` points to `src/views/`
+- **Modular Layout:** Separated the UI into `Sidebar`, `Navbar`, and `Main Content` (using `<Outlet />`) for maximum reusability.
+- **Dynamic UI:** Sidebar and Navbar elements are rendered dynamically from configuration objects (arrays).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🎨 Design & UI
+- **Tailwind CSS:** Utilized for a utility-first, fully responsive design.
+- **React Icons:** Integrated for a consistent and professional visual experience.
+
+---
+
+## 🛠️ Technologies Used
+
+- **Core:** React 18
+- **Build Tool:** Vite (Optimized for speed)
+- **Routing:** React Router DOM v6
+- **Styling:** Tailwind CSS
+- **Icons:** React Icons
+- **Environment Management:** Dotenv (.env)
+
+---
+
+## 🔑 Demo Access
+
+To test the dashboard functionality, use the following credentials on the login page:
+
+- **Username:** `admin`
+- **Password:** `admin_123`
+
+> *Note: These are demo credentials provided for recruitment and testing purposes.*
+
+---
+
+## ⚙️ Getting Started
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/N-Emil/Admin-Dashboard.git
