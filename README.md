@@ -6,6 +6,15 @@ This project is a **work-in-progress** and part of my professional development s
 
 ---
 
+## 📸 Screenshots
+
+<div class="flex justify-center gap-4">
+  <img src="public/dashboard.png" class="w-1/2 h-64 object-cover rounded" alt="Dashboard" />
+  <img src="public/login.png" class="w-1/2 h-64 object-cover rounded" alt="Login" />
+</div>
+
+---
+
 ## ✨ Features & Implementation
 
 ### 🛡️ Secure Authentication & Routing
