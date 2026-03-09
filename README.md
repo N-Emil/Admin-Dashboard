@@ -1,4 +1,4 @@
-# 🚀 React Admin Dashboard (Portfolio Project)
+# 🚀 React Admin Dashboard (Technical Showcase)
 
 This is a modern, modular **Admin Dashboard** built with React. It serves as a showcase of my frontend engineering skills, focusing on clean code architecture, secure routing, and scalable project structure. 
 

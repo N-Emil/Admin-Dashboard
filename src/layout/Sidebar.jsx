@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaSignOutAlt, FaTools, FaUser } from 'react-icons/fa'
 import { IoMdArrowDropleft } from 'react-icons/io'
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen = true, onClose }) => {
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
         { name: "Products", path: "products" },
@@ -27,7 +27,9 @@ const Sidebar = () => {
     return (
         <>
             {/* Full Sidebar */}
-            <div className='fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3]'>
+            <div className={`fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3] z-50 transform transition-transform duration-300
+                           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+                           md:translate-x-0`}> {/* always visible on md+ */}
                 {/* User side */}
                 <div className='h-25 w-50 bg-[#0D1A63] flex items-center justify-center'>
                     <div className='flex items-center gap-3 text-white'>
@@ -71,6 +73,11 @@ const Sidebar = () => {
                     ))}
                 </div>
             </div>
+            {/* overlay for small screens */}
+            {isOpen && (
+                /* overlay only behind the sidebar; sidebar is z-50 so clicks inside still work */
+                <div className='fixed inset-0 bg-black/50 z-40 md:hidden' onClick={onClose} />
+            )}
         </>
     )
 }

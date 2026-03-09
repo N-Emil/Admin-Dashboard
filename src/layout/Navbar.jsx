@@ -5,7 +5,9 @@ import { FaHome } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 
-const Navbar = () => {
+import { FaBars } from 'react-icons/fa'
+
+const Navbar = ({ onMenuClick }) => {
     const navIcons = [
         { id: 1, icon: <FaHome />, label: "Home" },
         { id: 2, icon: <MdMessage />, label: "Messages" },
@@ -15,10 +17,15 @@ const Navbar = () => {
         <>
             <nav className='w-full h-18 bg-[#1A2CA3] sticky top-0 flex items-center px-6'>
                 <div className='flex justify-between items-center w-full'>
+                    {/* hamburger button visible only on small screens */}
+                    <button onClick={onMenuClick} className='text-white text-2xl mr-4 md:hidden'>
+                        <FaBars />
+                    </button>
+
                     <div to="dashboard">
                         <img src={logo} className='w-25 h-25 cursor-pointer' alt="logo" />
                     </div>
-                    <input type="text" placeholder='Search...' className='w-120 h-9 px-3 rounded-lg bg-white/90 focus:bg-white transition-all' />
+                    <input type="text" placeholder='Search...' className='w-full md:w-120 h-9 px-3 rounded-lg bg-white/90 focus:bg-white transition-all' />
                     <div className='flex justify-center items-center gap-4'>
                         {navIcons.map(item => (
                             <div to={item.path} key={item.id} title={item.label} className='text-2xl text-white/70 transition-all duration-300 
