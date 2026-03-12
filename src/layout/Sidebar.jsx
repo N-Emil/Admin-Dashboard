@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import admin_icon from '../assets/admin_icon.png'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaSignOutAlt, FaTools, FaUser } from 'react-icons/fa'
 import { IoMdArrowDropleft } from 'react-icons/io'
+import { ThemeContext } from '@context/ThemeContext'
 
 const Sidebar = ({ isOpen = true, onClose }) => {
+    const { mode } = useContext(ThemeContext)
+
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
         { name: "Products", path: "products" },
@@ -27,11 +30,11 @@ const Sidebar = ({ isOpen = true, onClose }) => {
     return (
         <>
             {/* Full Sidebar */}
-            <div className={`fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3] z-50 transform transition-transform duration-300
+            <div className={`fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3] z-50 transform transition-transform duration-300 dark:bg-black
                            ${isOpen ? 'translate-x-0' : '-translate-x-full'}
                            md:translate-x-0`}> {/* always visible on md+ */}
                 {/* User side */}
-                <div className='h-25 w-50 bg-[#0D1A63] flex items-center justify-center'>
+                <div className='h-25 w-50 bg-[#0D1A63] flex items-center justify-center dark:bg-[#212121]'>
                     <div className='flex items-center gap-3 text-white'>
                         <img src={admin_icon} className='h-12 w-12 rounded-full' alt="user icon" />
                         <p className='font-medium text-base cursor-pointer' onClick={() => setShowPanel(!showPanel)}> Admin User </p>
@@ -42,7 +45,7 @@ const Sidebar = ({ isOpen = true, onClose }) => {
 
                     {/* Profile dropdown */}
                     {showPanel && (
-                        <div className='absolute top-20 w-48 p-3 bg-white shadow-lg rounded-lg z-50'>
+                        <div className='absolute top-20 w-48 p-3 bg-white shadow-lg rounded-lg z-50 dark:bg-black'>
                             <div className='flex flex-col'>
                                 {profileItems.map((item, index) => (
                                     <Link to={item.path} key={index} onClick={item.isLogout ? handleLogout : () => showPanel(false)}

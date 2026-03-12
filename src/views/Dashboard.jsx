@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaChartLine, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa'
+import { ThemeContext } from '@context/ThemeContext'
 
 const Dashboard = () => {
+  const { mode, switchMode } = useContext(ThemeContext)
   const stats = [
     { id: 1, title: "Total Users", value: "1,250", icon: <FaUsers />, color: "bg-blue-600" },
     { id: 2, title: "New Orders", value: "45", icon: <FaShoppingCart />, color: "bg-emerald-500" },
@@ -14,8 +16,8 @@ const Dashboard = () => {
   ]
   return (
     <>
-      <div className='w-full'>
-        <h1 className='text-2xl font-bold text-gray-800 mb-6'>Dashboard</h1>
+      <div className='w-full' >
+        <h1 className='text-2xl font-bold text-gray-800 mb-6 dark:text-white'>Dashboard</h1>
         <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
           {stats.map(item => (
             <div key={item.id} className='border p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all 
@@ -23,7 +25,7 @@ const Dashboard = () => {
               <div className={`${item.color} text-white p-4 rounded-xl text-2xl`}> {item.icon} </div>
               <div>
                 <p className='text-sm font-medium text-gray-500'> {item.title} </p>
-                <h3 className='text-xl font-bold text-gray-800'> {item.value} </h3>
+                <h3 className='text-xl font-bold text-gray-800 dark:text-white'> {item.value} </h3>
               </div>
             </div>
           ))}

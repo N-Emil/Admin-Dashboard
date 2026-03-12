@@ -8,6 +8,7 @@ import Tables from "@views/Tables";
 import Login from "./views/Login";
 import ProtectedRoute from "./validation/ProtectedRoute";
 import App from './App'
+import ThemeProvider from "./context/ThemeContext";
 
 const router = createBrowserRouter([
     {
@@ -47,5 +48,7 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router} />
+    <ThemeProvider>
+        <RouterProvider router={router} />
+    </ThemeProvider>
 )

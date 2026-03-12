@@ -1,8 +1,6 @@
-# 🚀 React Admin Dashboard (Technical Showcase)
+# 🚀 React Admin Dashboard (v2.0 - Theme & Context Evolution)
 
-This is a modern, modular **Admin Dashboard** built with React. It serves as a showcase of my frontend engineering skills, focusing on clean code architecture, secure routing, and scalable project structure. 
-
-This project is a **work-in-progress** and part of my professional development syllabus. I will be continuously adding new features such as Context API, API integration, and advanced state management as I progress.
+This is a modern, modular **Admin Dashboard** built with React. It serves as a showcase of my frontend engineering skills, focusing on clean code architecture, global state management, and scalable project structure.
 
 ---
 
@@ -13,36 +11,39 @@ This project is a **work-in-progress** and part of my professional development s
   <img src="public/login.png" class="w-1/2 h-64 object-cover rounded" alt="Login" />
 </div>
 
+### 🌙 Dark Mode
+<div class="flex justify-center gap-4">
+  <img src="public/dashboard-dark.png" class="w-1/2 h-64 object-cover rounded" alt="Dashboard Dark Mode" />
+</div>
+
 ---
 
-## ✨ Features & Implementation
+## ✨ Key Features & Implementation
+
+### 🌗 Theme Management & Automation (Latest Update)
+- **Global Context API:** Integrated `ThemeContext` to manage application-wide state (Light/Dark mode) effectively, eliminating prop drilling.
+- **Tailwind CSS v4 Integration:** Utilized the latest `@variant dark` logic combined with a root-level class toggle for high-performance theme switching.
+- **State Persistence:** User's theme preference is automatically synchronized with `localStorage` for a consistent experience across sessions.
 
 ### 🛡️ Secure Authentication & Routing
-- **Protected Routes:** Implemented a `ProtectedRoute` wrapper to manage session-based access.
-- **Authentication Logic:** Uses `localStorage` to persist login states and `React Router DOM` for seamless navigation.
-- **Environment Safety:** Sensitive credentials (like Admin login) are managed via `.env` variables using Vite's `import.meta.env`.
+- **Protected Routes:** Implemented a `ProtectedRoute` wrapper to manage session-based access control.
+- **Persistence:** Uses `localStorage` to maintain authentication states and `React Router DOM` for fluid navigation.
+- **Environment Safety:** Sensitive credentials and configurations are managed via `.env` variables using Vite's `import.meta.env`.
 
 ### 🏗️ Architecture & Developer Experience (DX)
-- **Path Aliasing:** Configured custom aliases in `vite.config.js` to avoid "prop drilling" and messy imports:
-  - `@/*` points to `src/`
-  - `@views/*` points to `src/views/`
-- **Modular Layout:** Separated the UI into `Sidebar`, `Navbar`, and `Main Content` (using `<Outlet />`) for maximum reusability.
-- **Dynamic UI:** Sidebar and Navbar elements are rendered dynamically from configuration objects (arrays).
-
-### 🎨 Design & UI
-- **Tailwind CSS:** Utilized for a utility-first, fully responsive design.
-- **React Icons:** Integrated for a consistent and professional visual experience.
+- **Path Aliasing:** Configured custom aliases (e.g., `@context/*`, `@views/*`) in `vite.config.js` for cleaner imports.
+- **Component-Based UI:** Modularized the layout into `Sidebar`, `Navbar`, and `Main Content` (using `<Outlet />`) for maximum reusability.
+- **Dynamic Configuration:** Sidebar and Navbar elements are rendered dynamically from reusable configuration objects.
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Core:** React 18
-- **Build Tool:** Vite (Optimized for speed)
+- **Core:** React 18 (Hooks, Context API)
+- **Styling:** Tailwind CSS (v4 features utilized)
 - **Routing:** React Router DOM v6
-- **Styling:** Tailwind CSS
-- **Icons:** React Icons
-- **Environment Management:** Dotenv (.env)
+- **Build Tool:** Vite
+- **Icons:** React Icons (Fa, Md, Io)
 
 ---
 
@@ -52,8 +53,6 @@ To test the dashboard functionality, use the following credentials on the login 
 
 - **Username:** `admin`
 - **Password:** `admin_123`
-
-> *Note: These are demo credentials provided for recruitment and testing purposes.*
 
 ---
 
