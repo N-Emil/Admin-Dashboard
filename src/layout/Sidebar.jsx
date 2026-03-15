@@ -3,11 +3,10 @@ import admin_icon from '../assets/admin_icon.png'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaSignOutAlt, FaTools, FaUser } from 'react-icons/fa'
 import { IoMdArrowDropleft } from 'react-icons/io'
-import { ThemeContext } from '@context/ThemeContext'
+import { AuthContext } from '@context/AuthContext'
 
 const Sidebar = ({ isOpen = true, onClose }) => {
-    const { mode } = useContext(ThemeContext)
-
+    const { user, logout } = useContext(AuthContext)
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
         { name: "Products", path: "products" },
@@ -17,12 +16,13 @@ const Sidebar = ({ isOpen = true, onClose }) => {
     const profileItems = [
         { name: "Profile", icon: <FaUser />, path: "profile" },
         { name: "Settings", icon: <FaTools />, path: "settings" },
-        { name: "Logut", icon: <FaSignOutAlt />, path: "/", isLogout: true }
+        { name: "Logout", icon: <FaSignOutAlt />, path: "/", isLogout: true }
     ]
 
     const navigate = useNavigate()
+
     const handleLogout = () => {
-        localStorage.removeItem("isLogged")
+        logout()
         navigate("/login")
     }
 
@@ -30,14 +30,14 @@ const Sidebar = ({ isOpen = true, onClose }) => {
     return (
         <>
             {/* Full Sidebar */}
-            <div className={`fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3] z-50 transform transition-transform duration-300 dark:bg-black
+            <div className={`fixed top-0 left-0 h-screen w-50 bg-[#1A2CA3] z-50 transform transition-transform duration-300 dark:bg-[#1E1E1E]
                            ${isOpen ? 'translate-x-0' : '-translate-x-full'}
                            md:translate-x-0`}> {/* always visible on md+ */}
                 {/* User side */}
                 <div className='h-25 w-50 bg-[#0D1A63] flex items-center justify-center dark:bg-[#212121]'>
                     <div className='flex items-center gap-3 text-white'>
                         <img src={admin_icon} className='h-12 w-12 rounded-full' alt="user icon" />
-                        <p className='font-medium text-base cursor-pointer' onClick={() => setShowPanel(!showPanel)}> Admin User </p>
+                        <p className='font-medium text-base cursor-pointer' onClick={() => setShowPanel(!showPanel)}> {user} </p>
                         <span className={`transition-transform duration-300 ${showPanel ? '-rotate-90' : 'rotate-0'}`}>
                             <IoMdArrowDropleft className='text-lg' />
                         </span>

@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { FaChartLine, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa'
-import { ThemeContext } from '@context/ThemeContext'
 
 const Dashboard = () => {
-  const { mode, switchMode } = useContext(ThemeContext)
   const stats = [
     { id: 1, title: "Total Users", value: "1,250", icon: <FaUsers />, color: "bg-blue-600" },
     { id: 2, title: "New Orders", value: "45", icon: <FaShoppingCart />, color: "bg-emerald-500" },

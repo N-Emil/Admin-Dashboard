@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import logo from '../assets/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { FaBars, FaHome, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { ThemeContext } from '@context/ThemeContext';
+import { AuthContext } from '@context/AuthContext';
 
 const Navbar = ({ onMenuClick }) => {
     const { mode, switchMode } = useContext(ThemeContext)
+    const { user } = useContext(AuthContext)
 
     const navIcons = [
         { id: 1, icon: <FaHome />, label: "Home" },
@@ -22,7 +23,7 @@ const Navbar = ({ onMenuClick }) => {
 
     return (
         <>
-            <nav className='w-full h-18 bg-[#1A2CA3] sticky top-0 flex items-center px-6 dark:bg-black' >
+            <nav className='w-full h-18 bg-[#1A2CA3] sticky top-0 flex items-center px-6 dark:bg-[#252525]' >
                 <div className='flex justify-between items-center w-full'>
                     {/* hamburger button visible only on small screens */}
                     <button onClick={onMenuClick} className='text-white text-2xl mr-4 md:hidden'>
@@ -30,7 +31,7 @@ const Navbar = ({ onMenuClick }) => {
                     </button>
 
                     <div to="dashboard">
-                        <img src={logo} className='w-25 h-25 cursor-pointer' alt="logo" />
+                        <h1 className='text-2xl font-bold text-white'>Hi, {user}</h1>
                     </div>
                     <input type="text" placeholder='Search...' className='w-full md:w-120 h-9 px-3 rounded-lg bg-white/90 
                     focus:bg-white transition-all' />

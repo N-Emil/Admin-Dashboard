@@ -7,8 +7,9 @@ import Products from "@views/Products";
 import Tables from "@views/Tables";
 import Login from "./views/Login";
 import ProtectedRoute from "./validation/ProtectedRoute";
-import App from './App'
 import ThemeProvider from "./context/ThemeContext";
+import App from './App'
+import AuthProvider from "./context/AuthContext";
 
 const router = createBrowserRouter([
     {
@@ -48,7 +49,9 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-    <ThemeProvider>
-        <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+        <ThemeProvider>
+            <RouterProvider router={router} />
+        </ThemeProvider>
+    </AuthProvider>
 )

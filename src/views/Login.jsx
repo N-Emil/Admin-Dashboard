@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '@context/AuthContext'
 
 const Login = () => {
+    const { login } = useContext(AuthContext)
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -15,7 +17,7 @@ const Login = () => {
         setError('')
 
         if (username == validUsername && password == validPassword) {
-            localStorage.setItem("isLogged", "true")
+            login(username)
             navigate('/app/dashboard')
         } else {
             setError("Invalid username or password")
