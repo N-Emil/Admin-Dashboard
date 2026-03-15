@@ -27,12 +27,13 @@ This is a modern, modular **Admin Dashboard** built with React. It serves as a s
 
 ### 🛡️ Secure Authentication & Routing
 - **Protected Routes:** Implemented a `ProtectedRoute` wrapper to manage session-based access control.
+- **Session-Based Protection:** Transitioned to sessionStorage to ensure that authentication states are wiped automatically when the browser tab is closed.
 - **Persistence:** Uses `localStorage` to maintain authentication states and `React Router DOM` for fluid navigation.
 - **Environment Safety:** Sensitive credentials and configurations are managed via `.env` variables using Vite's `import.meta.env`.
 
 ### 🏗️ Architecture & Developer Experience (DX)
 - **Path Aliasing:** Configured custom aliases (e.g., `@context/*`, `@views/*`) in `vite.config.js` for cleaner imports.
-- **Component-Based UI:** Modularized the layout into `Sidebar`, `Navbar`, and `Main Content` (using `<Outlet />`) for maximum reusability.
+- **Component-Based UI:** Modularized the layout into `Sidebar`, `Navbar`, `Footer` and `Main Content` (using `<Outlet />`) for maximum reusability.
 - **Dynamic Configuration:** Sidebar and Navbar elements are rendered dynamically from reusable configuration objects.
 
 ---
