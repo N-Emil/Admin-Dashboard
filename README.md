@@ -34,7 +34,7 @@ This is a modern, modular **Admin Dashboard** built with React. It serves as a s
 ### 🏗️ Architecture & Developer Experience (DX)
 - **Path Aliasing:** Configured custom aliases (e.g., `@context/*`, `@views/*`) in `vite.config.js` for cleaner imports.
 - **Component-Based UI:** Modularized the layout into `Sidebar`, `Navbar`, `Footer` and `Main Content` (using `<Outlet />`) for maximum reusability.
-- **Dynamic Configuration:** Sidebar and Navbar elements are rendered dynamically from reusable configuration objects.
+- **Dynamic Configuration:** Sidebar, Navbar and Footer elements are rendered dynamically from reusable configuration objects.
 
 ---
 

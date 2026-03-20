@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaChartLine, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa'
+import PageHeader from '@views/PageHeader'
 
 const Dashboard = () => {
   const stats = [
@@ -15,7 +16,7 @@ const Dashboard = () => {
   return (
     <>
       <div className='w-full' >
-        <h1 className='text-2xl font-bold text-gray-800 mb-6 dark:text-white'>Dashboard</h1>
+        <PageHeader title="Dashboard" />
         <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
           {stats.map(item => (
             <div key={item.id} className='border p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all 

@@ -1,8 +1,11 @@
 import React from 'react'
+import PageHeader from '@views/PageHeader'
 
 const Tables = () => {
   return (
-    <div>Tables</div>
+    <>
+      <PageHeader title="Tables" />
+    </>
   )
 }
 

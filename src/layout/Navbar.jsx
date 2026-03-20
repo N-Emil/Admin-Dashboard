@@ -33,7 +33,7 @@ const Navbar = ({ onMenuClick }) => {
                     <div to="dashboard">
                         <h1 className='text-2xl font-bold text-white'>Hi, {user}</h1>
                     </div>
-                    <input type="text" placeholder='Search...' className='w-full md:w-120 h-9 px-3 rounded-lg bg-white/90 
+                    <input type="search" placeholder='Search...' className='w-full md:w-120 h-9 px-3 rounded-lg bg-white/90 
                     focus:bg-white transition-all' />
                     <div className='flex justify-center items-center gap-4'>
                         {navIcons.map(item => (
