@@ -3,13 +3,14 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import './index.css'
 import ErrorPage from '@views/ErrorPage'
 import Dashboard from '@views/Dashboard'
+import Product_Form from "@views/Product_Form";
 import Products from "@views/Products";
-import Tables from "@views/Tables";
 import Login from "./views/Login";
+import Product_Detail from "@views/Product_Detail";
 import ProtectedRoute from "./validation/ProtectedRoute";
 import ThemeProvider from "./context/ThemeContext";
-import App from './App'
 import AuthProvider from "./context/AuthContext";
+import App from './App'
 
 const router = createBrowserRouter([
     {
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
                 Component: Dashboard
             },
             {
-                path: "products",
+                path: "product_form",
+                Component: Product_Form
+            },
+            {
+                path: "product",
                 Component: Products
             },
             {
-                path: "tables",
-                Component: Tables
+                path: "product/:id",
+                Component: Product_Detail
             }
         ]
     },

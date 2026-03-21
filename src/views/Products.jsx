@@ -1,107 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageHeader from '@views/PageHeader'
-import InputFields from './InputFields'
+import { FaEdit, FaEye } from 'react-icons/fa'
+import { FaDeleteLeft } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 const Products = () => {
-  const btnStyle = 'border-none rounded-lg p-2 cursor-pointer text-white w-20'
+  const btnStyle = 'text-white rounded-lg p-2 cursor-pointer'
 
-  const textFields = [
-    {
-      label: 'Name', name: 'name', type: 'text',
-      validate: (val) => val.trim().length > 0 && val.trim().length < 3 ? 'Name must be at least 3 characters long' : ''
-    },
-    {
-      label: 'Count', name: 'count', type: 'number',
-      validate: (val) => val && (Number(val) <= 0 || Number(val) % 1 !== 0) ? 'Count must be positive and integer number' : ''
-    },
-    {
-      label: 'Price', name: 'price', type: 'number',
-      validate: (val) => val && (Number(val) <= 0) ? 'Price must be positive number' : ''
-    },
-    { label: 'Date', name: 'date', type: 'date', validate: () => '' },
-    { label: 'Category', name: 'category', tag: 'select', options: ['Electronics', 'Food', 'Clothes'], validate: () => '' },
-    {
-      label: 'Description', name: 'description', tag: 'textarea',
-      validate: (val) => val.trim().length > 200 ? 'Description must be between 0 and 200 characters' : ''
-    }
-  ]
+  const navigate = useNavigate()
 
-  const [formData, setFormData] = useState({
-    name: '',
-    count: '',
-    price: '',
-    date: '',
-    category: 'Electronics',
-    description: ''
-  })
+  const [productList, setProductList] = useState([])
 
-  const [errors, setErrors] = useState({})
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem('products')) || []
+    setProductList(savedData)
+  }, [])
 
-  const isFormValid =
-    formData.date !== '' &&
-    formData.name.trim().length >= 3 &&
-    Number(formData.count) > 0 &&
-    Number(formData.count) % 1 === 0 &&
-    Number(formData.price) > 0 &&
-    formData.description.trim().length <= 200 &&
-    formData.description.trim().length > 0
-
-  const handleInput = (e) => {
-    e.preventDefault()
-    console.log('For data: ', formData);
-  }
-
-  const handleChangeForm = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev, [name]: value
-    }))
-
-    const field = textFields.find(f => f.name === name)
-    if (field) {
-      setErrors(prev => ({
-        ...prev, [name]: field.validate(value)
-      }))
-    }
-  }
-
-  const resetForm = (e) => {
-    e.preventDefault()
-    setFormData({ name: '', count: '', price: '', date: '', category: 'Electronics', description: '' })
-    setErrors({})
+  const deleteCard = (id) => {
+    const updateList = productList.filter(item => item.id != id)
+    setProductList(updateList)
+    localStorage.setItem('products', JSON.stringify(updateList))
   }
 
   return (
     <>
-      <div className='w-full'>
-        <PageHeader title="Products" />
-        <form className='border rounded-lg p-4 md:p-10'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-            {textFields.map(field => (
-              <div key={field.name}>
-                <InputFields label={field.label} name={field.name} type={field.type}
-                  value={formData[field.name]} tag={field.tag || 'input'} onChange={handleChangeForm}
-                  className={errors[field.name] ? 'border-red-500' : ''} >
-                  {field.tag === 'select' && field.options.map(opt => (
-                    <option key={opt} value={opt}> {opt} </option>
-                  ))}
-                  {errors[field.name] && (
-                    <p className='text-red-500'> {errors[field.name]} </p>
-                  )}
-                </InputFields>
-                {errors[field.name] && (
-                  <p className='text-red-500'> {errors[field.name]} </p>
-                )}
+      <PageHeader title="Products" />
+      <div className='max-w-6xl mx-auto'>
+        <div className='flex flex-wrap justify-start gap-4 md:gap-7'>
+          {productList.map(item => (
+            <div key={item.id} className='border-none rounded-lg p-3 bg-[#406093] dark:bg-gray-700 text-white hover:scale-110 transition 
+            duration-400 font-medium text-center'>
+              <img src={item.image} className='border-none rounded-lg bg-white dark:bg-gray-500 mb-3 h-24 md:h-30 w-32 md:w-45' />
+              <p className='mb-3 text-xl'> {item.name} </p>
+              <p className='mb-3 text-lg text-[#FFA95A]'> {item.price} $ </p>
+              <p className='mb-5 font-normal text-sm text-[#E8E2D8] break-words max-w-[200px]'> {item.description} </p>
+              {/* <p className='mb-2'> Count: {item.count} </p> */}
+              {/* <p className='mb-2'> Category: {item.category} </p> */}
+              <div className='flex justify-center align-center gap-3'>
+                <button className={`${btnStyle} bg-yellow-500`} onClick={() => navigate(`/app/product/${item.id}`)} > <FaEye /> </button>
+                <button className={`${btnStyle} bg-blue-500`}> <FaEdit /> </button>
+                <button className={`${btnStyle} bg-red-500`} onClick={() => deleteCard(item.id)}> <FaDeleteLeft /> </button>
               </div>
-            ))}
-          </div>
-
-          <div className='flex justify-center items-center gap-5 mt-15'>
-            <button className={`${btnStyle} ${isFormValid ? 'bg-green-500 hover:bg-[#A0D585]' : 'cursor-not-allowed bg-gray-400'}  `}
-              type='submit' onClick={handleInput} disabled={!isFormValid}>Submit</button>
-            <button className={`${btnStyle} bg-amber-600 hover:bg-amber-700 `} onClick={resetForm} >Reset</button>
-          </div>
-        </form>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )

@@ -9,8 +9,8 @@ const Sidebar = ({ isOpen = true, onClose }) => {
     const { user, logout } = useContext(AuthContext)
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
-        { name: "Products", path: "products" },
-        { name: "Tables", path: "tables" }
+        { name: "Product Form", path: "product_form" },
+        { name: "Products", path: "product" }
     ]
 
     const profileItems = [

@@ -4,6 +4,10 @@ const InputFields = ({ label, type = 'text', htmlFor, name, id, tag = 'input', c
     const Component = tag;
     const inputStyle = `border-2 dark:border-gray-700 rounded-lg focus:border-blue-500 hover:border-blue-500 
     dark:bg-[#212121] dark:text-white transition-all outline-none ${className}`
+
+    const { value, ...restProps } = props
+    const finalProps = type === 'file' ? restProps : props
+
     return (
         <>
             <div className='flex gap-5'>
@@ -11,9 +15,11 @@ const InputFields = ({ label, type = 'text', htmlFor, name, id, tag = 'input', c
                     {label}
                 </label>
                 {tag === 'input' ? (
-                    <input type={type} name={name} id={id} {...props} className={inputStyle} />
+                    <input type={type} name={name} id={id} {...finalProps} className={inputStyle} />
                 ) : (
-                    <Component type={tag === 'input' ? type : undefined} name={name} id={id} {...props}
+                    <Component
+                        type={tag === 'input' ? type : undefined}
+                        name={name} id={id} {...finalProps}
                         className={`${inputStyle} ${tag === 'textarea' ? 'min-h-15' : ''}`}>
                         {children}
                     </Component>
