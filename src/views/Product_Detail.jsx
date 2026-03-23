@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PageHeader from './PageHeader'
+import PageHeader from '../components/PageHeader'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IoReturnUpBack } from 'react-icons/io5'
 

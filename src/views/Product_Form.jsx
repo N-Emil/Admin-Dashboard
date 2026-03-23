@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import PageHeader from '@views/PageHeader'
-import InputFields from './InputFields'
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
+import PageHeader from '../components/PageHeader'
+import InputFields from '../components/InputFields'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Product_Form = () => {
   const btnStyle = 'border-none rounded-lg p-2 cursor-pointer text-white w-20'
@@ -24,7 +26,7 @@ const Product_Form = () => {
       label: 'Description', name: 'description', tag: 'textarea',
       validate: (val) => val.trim().length > 200 ? 'Description must be between 0 and 200 characters' : ''
     },
-    { label: 'Photo', name: 'photo', type: 'file', validate: () => '' }
+    { label: 'Photo', name: 'photo', type: 'text', placeholder: 'https://example.com/image.png', validate: () => '' }
   ]
 
   const [formData, setFormData] = useState({
@@ -34,7 +36,7 @@ const Product_Form = () => {
     date: '',
     category: 'Electronics',
     description: '',
-    photo: []
+    photo: ''
   })
 
   const [errors, setErrors] = useState({})
@@ -61,47 +63,65 @@ const Product_Form = () => {
     formData.photo.length > 0
     ;
 
-  const handleInput = async (e) => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (id) {
+      const existProduct = JSON.parse(localStorage.getItem('products')) || []
+      const foundProduct = existProduct.find(p => p.id === Number(id))
+
+      if (foundProduct) {
+        setFormData({
+          ...foundProduct,
+          photo: foundProduct.image
+        })
+      }
+    }
+  }, [id])
+
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     if (isFormValid) {
       const existProduct = JSON.parse(localStorage.getItem('products')) || []
 
-      const lastId = existProduct.length > 0 ? existProduct[existProduct.length - 1].id : 0
-      const newId = lastId + 1
+      if (id) {
+        const updateProduct = existProduct.map(p =>
+          p.id === Number(id) ? { ...formData, id: Number(id), image: formData.photo } : p
+        )
+        localStorage.setItem('products', JSON.stringify(updateProduct))
+        setSuccess('Product updated successfully!')
+      } else {
+        const lastId = existProduct.length > 0 ? existProduct[existProduct.length - 1].id : 0
+        const newId = lastId + 1
 
-      const file = formData.photo[0]
-      const basePhoto = await new Promise((resolve) => { // Create base 64 format
-        const reader = new FileReader()
-        reader.onload = () => resolve(reader.result)
-        reader.readAsDataURL(file) // Convert a photo into the long text 
-      })
+        const newProduct = {
+          ...formData,
+          id: newId,
+          image: formData.photo
+        }
 
-      const newProduct = {
-        ...formData,
-        id: newId,
-        image: basePhoto
+        const updateProduct = [...existProduct, newProduct]
+        localStorage.setItem('products', JSON.stringify(updateProduct))
+        setSuccess('Product added successfully!')
+        resetForm(e)
       }
 
-      const updateProduct = [...existProduct, newProduct]
-      localStorage.setItem('products', JSON.stringify(updateProduct))
-
-      resetForm(e)
-      setSuccess('Data added is successfuly!')
+      setTimeout(() => { navigate('/app/product') }, 1000);
     }
   }
 
   const handleChangeForm = (e) => {
-    const { name, value, type, files } = e.target
-    const fieldValue = type === 'file' ? Array.from(files) : value
+    const { name, value } = e.target
     setFormData(prev => ({
-      ...prev, [name]: fieldValue
+      ...prev, [name]: value
     }))
 
     const field = textFields.find(f => f.name === name)
     if (field) {
       setErrors(prev => ({
-        ...prev, [name]: field.validate(fieldValue)
+        ...prev, [name]: field.validate(value)
       }))
     }
   }
@@ -115,11 +135,12 @@ const Product_Form = () => {
   return (
     <>
       <div className='w-full'>
-        <PageHeader title="Product Form" />
+        <PageHeader title={id ? 'Edit product' : 'Add product'} />
         {success && (
-          <p className='text-green-500'> {success} </p>
+          <p className='flex justify-center items-center m-auto gap-3 w-50 text-xs text-green-600 text-center bg-green-50 
+          border border-green-200 rounded p-2'> <IoIosCheckmarkCircleOutline />  {success} </p>
         )}
-        <form className='border rounded-lg p-4 md:p-10'>
+        <form onSubmit={handleSubmit} className='border rounded-lg p-4 md:p-10'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
             {textFields.map(field => (
               <div key={field.name}>
@@ -127,18 +148,18 @@ const Product_Form = () => {
                   label={field.label}
                   name={field.name}
                   type={field.type}
-                  value={field.type === 'file' ? undefined : formData[field.name]}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
                   tag={field.tag || 'input'} onChange={handleChangeForm}
-                  className={errors[field.name] ? 'border-red-500' : ''} >
+                  className={errors[field.name] ? 'border-red-500' : ''}
+                  parentClassName='flex-col md:flex-row md:gap-5 md:items-center'
+                >
                   {field.tag === 'select' && field.options.map(opt => (
                     <option key={opt} value={opt}> {opt} </option>
                   ))}
-                  {errors[field.name] && (
-                    <p className='text-red-500'> {errors[field.name]} </p>
-                  )}
                 </InputFields>
                 {errors[field.name] && (
-                  <p className='text-red-500'> {errors[field.name]} </p>
+                  <p className='text-red-500 text-xs mt-1 ml:md-20'> {errors[field.name]} </p>
                 )}
               </div>
             ))}
@@ -146,7 +167,7 @@ const Product_Form = () => {
 
           <div className='flex justify-center items-center gap-5 mt-15'>
             <button className={`${btnStyle} ${isFormValid ? 'bg-green-500 hover:bg-[#A0D585]' : 'cursor-not-allowed bg-gray-400'}  `}
-              type='submit' onClick={handleInput} disabled={!isFormValid}>Submit</button>
+              type='submit' disabled={!isFormValid}>Submit</button>
             <button className={`${btnStyle} bg-amber-600 hover:bg-amber-700 `} onClick={resetForm} >Reset</button>
           </div>
         </form>

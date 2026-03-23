@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
 import { FaBars, FaHome, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
-import { ThemeContext } from '@context/ThemeContext';
-import { AuthContext } from '@context/AuthContext';
+import { ThemeContext } from '../context/ThemeContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = ({ onMenuClick }) => {
     const { mode, switchMode } = useContext(ThemeContext)

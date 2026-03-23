@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PageHeader from '@views/PageHeader'
+import PageHeader from '../components/PageHeader'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { FaDeleteLeft } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
@@ -17,9 +17,15 @@ const Products = () => {
   }, [])
 
   const deleteCard = (id) => {
-    const updateList = productList.filter(item => item.id != id)
+    const updateList = productList.filter(item => item.id !== id)
     setProductList(updateList)
-    localStorage.setItem('products', JSON.stringify(updateList))
+
+    if (updateList.length === 0) {
+      localStorage.removeItem('products')
+    } else {
+      localStorage.setItem('products', JSON.stringify(updateList))
+    }
+
   }
 
   return (
@@ -38,7 +44,7 @@ const Products = () => {
               {/* <p className='mb-2'> Category: {item.category} </p> */}
               <div className='flex justify-center align-center gap-3'>
                 <button className={`${btnStyle} bg-yellow-500`} onClick={() => navigate(`/app/product/${item.id}`)} > <FaEye /> </button>
-                <button className={`${btnStyle} bg-blue-500`}> <FaEdit /> </button>
+                <button className={`${btnStyle} bg-blue-500`} onClick={() => navigate(`/app/product_form/${item.id}`)}> <FaEdit /> </button>
                 <button className={`${btnStyle} bg-red-500`} onClick={() => deleteCard(item.id)}> <FaDeleteLeft /> </button>
               </div>
             </div>

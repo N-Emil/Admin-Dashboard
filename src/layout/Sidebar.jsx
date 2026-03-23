@@ -3,19 +3,20 @@ import admin_icon from '../assets/admin_icon.png'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaSignOutAlt, FaTools, FaUser } from 'react-icons/fa'
 import { IoMdArrowDropleft } from 'react-icons/io'
-import { AuthContext } from '@context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 
 const Sidebar = ({ isOpen = true, onClose }) => {
     const { user, logout } = useContext(AuthContext)
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
         { name: "Product Form", path: "product_form" },
-        { name: "Products", path: "product" }
+        { name: "Products", path: "product" },
+        { name: "Users", path: "users" }
     ]
 
     const profileItems = [
-        { name: "Profile", icon: <FaUser />, path: "profile" },
-        { name: "Settings", icon: <FaTools />, path: "settings" },
+        { name: "Profile", icon: <FaUser />, path: "#" },
+        { name: "Settings", icon: <FaTools />, path: "#" },
         { name: "Logout", icon: <FaSignOutAlt />, path: "/", isLogout: true }
     ]
 
