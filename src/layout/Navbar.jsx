@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
 import { FaBars, FaHome, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
-import { ThemeContext } from '../context/ThemeContext';
-import { AuthContext } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
+import useTheme from '../hooks/useTheme';
 
 const Navbar = ({ onMenuClick }) => {
-    const { mode, switchMode } = useContext(ThemeContext)
-    const { user } = useContext(AuthContext)
+    const { mode, switchMode } = useTheme()
+    const { user } = useAuth()
 
     const navIcons = [
         { id: 1, icon: <FaHome />, label: "Home" },

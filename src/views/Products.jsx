@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import PageHeader from '../components/PageHeader'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { FaDeleteLeft } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
+import useLocaleStorage from '../hooks/useLocaleStorage'
 
 const Products = () => {
   const btnStyle = 'text-white rounded-lg p-2 cursor-pointer'
 
   const navigate = useNavigate()
 
-  const [productList, setProductList] = useState([])
-
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('products')) || []
-    setProductList(savedData)
-  }, [])
+  const [productList, setProductList] = useLocaleStorage('products', [])
 
   const deleteCard = (id) => {
     const updateList = productList.filter(item => item.id !== id)

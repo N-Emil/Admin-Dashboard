@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
+import useAuth from '../hooks/useAuth'
 
 const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
     const isAuth = sessionStorage.getItem("isLogged") === "true" && user != 'Guest'
 
     if (!isAuth) {

@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 const FormStructure = ({ title, path, linkText, fields, onSubmit, error, success }) => {
     return (
         <>
@@ -19,6 +17,7 @@ const FormStructure = ({ title, path, linkText, fields, onSubmit, error, success
                     {fields && fields.map((field, index) => (
                         <input
                             key={index}
+                            name={field.name}
                             type={field.type}
                             placeholder={field.placeholder}
                             className='border p-2 rounded outline-none focus:border-blue-500'

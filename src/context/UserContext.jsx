@@ -1,12 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect } from "react";
+import useLocaleStorage from "../hooks/useLocaleStorage";
 
 export const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const [users, setUsers] = useState(() => {
-        const savedUsers = localStorage.getItem('registeredUsers')
-        return savedUsers ? JSON.parse(savedUsers) : []
-    })
+    const [users, setUsers] = useLocaleStorage('registeredUsers', [])
 
     useEffect(() => {
         if (users.length > 0) {

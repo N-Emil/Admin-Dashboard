@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react'
+import { useState } from 'react'
 import admin_icon from '../assets/admin_icon.png'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaSignOutAlt, FaTools, FaUser } from 'react-icons/fa'
 import { IoMdArrowDropleft } from 'react-icons/io'
-import { AuthContext } from '../context/AuthContext'
+import useAuth from '../hooks/useAuth'
 
 const Sidebar = ({ isOpen = true, onClose }) => {
-    const { user, logout } = useContext(AuthContext)
+    const { user, logout } = useAuth()
     const navLinks = [
         { name: "Dashboard", path: "dashboard" },
         { name: "Product Form", path: "product_form" },

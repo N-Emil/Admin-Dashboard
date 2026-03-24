@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
 import logo from '@assets/logo.webp'
-import { AuthContext } from '../context/AuthContext'
+import useAuth from '../hooks/useAuth'
 
 const Footer = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
     return (
         <>
             <footer className='bg-[#003049] text-white h-auto min-h-40 grid grid-cols-1 sm:grid-cols-3 items-center px-5 sm:px-10 py-5 dark:bg-[#1A1A1A]'>

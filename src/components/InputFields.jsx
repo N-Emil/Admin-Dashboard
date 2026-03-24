@@ -1,5 +1,3 @@
-import React from 'react'
-
 const InputFields = ({ label, placeholder, type = 'text', htmlFor, name, id, tag = 'input', children, parentClassName,
     className, ...props }) => {
     const Component = tag;

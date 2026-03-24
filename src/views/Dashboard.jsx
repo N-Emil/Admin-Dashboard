@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaChartLine, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa'
 import PageHeader from '../components/PageHeader'
 

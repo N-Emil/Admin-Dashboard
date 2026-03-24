@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Sidebar from './layout/Sidebar'
 import Navbar from './layout/Navbar'
 import Footer from './layout/Footer'
@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 
 const App = () => {
 
-  const [sidebarOpen, setSidebarOpen] = React.useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const toggleSidebar = () => setSidebarOpen(open => !open)
   const closeSidebar = () => setSidebarOpen(false)

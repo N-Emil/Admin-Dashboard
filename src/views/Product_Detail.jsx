@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PageHeader from '../components/PageHeader'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IoReturnUpBack } from 'react-icons/io5'
+import useLocaleStorage from '../hooks/useLocaleStorage'
 
 const Product_Detail = () => {
     const { id } = useParams()
@@ -9,8 +10,8 @@ const Product_Detail = () => {
     const [product, setProduct] = useState(null)
 
     useEffect(() => {
-        const existProducts = JSON.parse(localStorage.getItem('products')) || []
-        const foundProduct = existProducts.find(p => p.id === Number(id))
+        const [products] = useLocaleStorage('products', [])
+        const foundProduct = products.find(p => p.id === Number(id))
         setProduct(foundProduct)
     }, [id])
 

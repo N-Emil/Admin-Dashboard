@@ -43,6 +43,27 @@ This is a modern, modular **Admin Dashboard** built with React. It serves as a s
 
 ---
 
+### ⚓ Custom Hooks & Architecture
+
+The project follows a modular "Hook-based" architecture to separate logic from UI and ensure reusability:
+
+* **`useForm`**: A custom hook for managing controlled form inputs. It handles state updates for all fields dynamically, reducing boilerplate code in forms like Login and Register.
+* **`useLocaleStorage`**: Synchronizes state with `localStorage` automatically. It’s used to persist user preferences like the application theme across sessions.
+* **Context-Specific Hooks**: 
+    * **`useAuth`**, **`useTheme`**, and **`useUser`**: These hooks provide easy access to their respective contexts. 
+    * **`BaseContext` Utility**: I implemented a higher-order utility called `BaseContext` to standardize how context hooks are created. This ensures that every context hook automatically checks if it's being used within its required Provider, throwing a descriptive error if not.
+
+---
+
+### 🖥️ Smart Overlay & Onboarding
+
+To enhance the user experience and provide essential information to first-time visitors, I implemented a custom **Overlay** component:
+
+* **Instructional Layer**: Displays a welcome message and the necessary **Admin Credentials** immediately upon visiting the Registration page.
+* **One-Time Visibility**: Using a combination of `useState` and `localStorage`, the overlay is programmed to appear only until the user dismisses it. 
+* **Persistence**: Once the "X" button is clicked, a flag is stored in the browser's local storage. This ensures that even if the page is refreshed, the overlay remains hidden, providing a seamless experience for returning users.
+* **UX Design**: Utilizes a semi-transparent backdrop and high-priority `z-index` to focus user attention on key demo information.
+
 ## ⚠️ Project Scope & Usage Note
 
 This project is a **Frontend Portfolio Showcase** designed to demonstrate administrative dashboard architecture, CRUD operations, and global state management. Please note the following regarding its functional scope:

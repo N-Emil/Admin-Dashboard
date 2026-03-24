@@ -1,30 +1,36 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import FormStructure from '../components/FormStructure'
+import useForm from '../hooks/useForm'
+import useAuth from '../hooks/useAuth'
+import Overlay from './Overlay'
 
 const Login = () => {
-    const fields = [
-        { placeholder: 'Username...', type: 'text', onChange: (e) => setUsername(e.target.value) },
-        { placeholder: 'Password...', type: 'password', onChange: (e) => setPassword(e.target.value) }
-    ]
-
-    const { login } = useContext(AuthContext)
+    const { login } = useAuth()
     const navigate = useNavigate()
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
     const validUsername = import.meta.env.VITE_ADMIN_USERNAME;
     const validPassword = import.meta.env.VITE_ADMIN_PASSWORD;
 
+    const [values, handleChange] = useForm({
+        userName: '',
+        password: ''
+    })
+
+    const fields = [
+        { name: 'userName', placeholder: 'Username...', type: 'text', value: values.userName, onChange: handleChange },
+        { name: 'password', placeholder: 'Password...', type: 'password', value: values.password, onChange: handleChange }
+    ]
+
     const handleLogin = (e) => {
         e.preventDefault()
         setError('')
 
-        if (username == validUsername && password == validPassword) {
-            login(username)
+        if (values.userName == validUsername && values.password == validPassword) {
+            login(values.userName)
             setSuccess('Login successful!')
 
             setTimeout(() => {
@@ -37,6 +43,7 @@ const Login = () => {
     }
     return (
         <>
+            <Overlay />
             <FormStructure
                 title='Login'
                 path='/register'
@@ -45,8 +52,7 @@ const Login = () => {
                 error={error}
                 success={success}
                 onSubmit={handleLogin}
-            >
-            </FormStructure>
+            />
         </>
     )
 }

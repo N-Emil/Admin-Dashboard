@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
 import PageHeader from '../components/PageHeader'
-import { UserContext } from '../context/UserContext'
 import { MdDelete } from 'react-icons/md'
+import useUser from '../hooks/useUser'
 
 const Users = () => {
     const headers = ['Full Name', 'Email', 'Password', 'Registration Date', 'Action']
-    const { users, deleteUser } = useContext(UserContext)
+    const { users, deleteUser } = useUser()
 
     const headerStyle = 'px-4 py-3 md:px-10 md:py-5 text-left font-medium bg-[#1C4D8D] text-white dark:bg-gray-700 whitespace-nowrap'
     const dataStyle = 'border-b px-4 py-3 md:px-10 md:py-5 bg-[#4988C4] text-white dark:bg-gray-500 whitespace-nowrap'

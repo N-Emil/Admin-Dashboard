@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import PageHeader from '../components/PageHeader'
 import InputFields from '../components/InputFields'
