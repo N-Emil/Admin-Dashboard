@@ -9,8 +9,9 @@ const Product_Detail = () => {
     const navigate = useNavigate()
     const [product, setProduct] = useState(null)
 
+    const [products] = useLocaleStorage('products', [])
+
     useEffect(() => {
-        const [products] = useLocaleStorage('products', [])
         const foundProduct = products.find(p => p.id === Number(id))
         setProduct(foundProduct)
     }, [id])

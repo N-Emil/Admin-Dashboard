@@ -27,5 +27,18 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "vite": "^7.3.1"
-  }
+  },
+  "description": "This is a modern, modular **Admin Dashboard** built with React. It serves as a showcase of my frontend engineering skills, focusing on clean code architecture, global state management, and scalable project structure.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N-Emil/Admin-Dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N-Emil/Admin-Dashboard/issues"
+  },
+  "homepage": "https://github.com/N-Emil/Admin-Dashboard#readme"
 }
